@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const InitiateAuthModal = ({ oldValue }) => {
   const [auth, setAuth] = useState("");
 
   const mode = useSelector((state) => state.mode.userModes[0]);
-
+  console.log("value of mode",mode);
   const body = {
     ...oldValue,
     authMode: auth,
   };
   console.log("body from initiaAuth", body);
-  const handleSubmit = () => {
-    // window.verify_otp.showModal();
+  const handleSubmit = async() => {
+    await axios
+    .post("http://localhost:3000/initiateAuth", {
+      ...body
+    })
+    .then((response) => {
+      if(response.status === 202){
+        console.log(response.data.message);
+        window.verify_otp.showModal();
+        }
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("inside error function");
+        console.error("this is the error", error);
+      });
     console.log(body);
   };
+
 
   return (
     <div>
@@ -24,7 +40,7 @@ const InitiateAuthModal = ({ oldValue }) => {
           <button className="btn btn-sm btn-circle  btn-ghost absolute right-2 top-2">
             ✕
           </button>
-          {mode ? (
+          
             <div>
               <div className="lg:py-5 md:py-5 lg:px-20 md:px-10 p-5 space-y-10">
                 <div className="flex justify-between items-center flex-wrap gap-2">
@@ -82,11 +98,8 @@ const InitiateAuthModal = ({ oldValue }) => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="flex justify-center items-center h-[400px]">
-              <p className="text-sm ">Loading....</p>
-            </div>
-          )}
+          
+          
         </form>
       </dialog>
     </div>

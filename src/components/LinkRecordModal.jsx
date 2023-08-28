@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
+import axios from "axios";
 const init = {
   patientHealthId: "",
   patientRefNumber: "",
   patientDisplay: "",
   careContextRefNumber: "",
-  careContextDisplay: "",
+  careContextDeisplay: "",
 };
 const LinkRecordModal = () => {
   const [state, setState] = useState({ ...init });
@@ -19,9 +20,23 @@ const LinkRecordModal = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     console.log(state);
-
+    await axios
+    .post("http://localhost:3000/linkRecord", {
+     ...state
+    })
+    .then((response) => {
+      if(response.status === 202){
+        console.log(response.data.message);
+        //window.verify_otp.showModal();
+        }
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("inside error function");
+        console.error("this is the error", error);
+      });
     setState({ ...init });
   };
 
@@ -31,7 +46,7 @@ const LinkRecordModal = () => {
       state.patientRefNumber &&
       state.patientDisplay &&
       state.careContextRefNumber &&
-      state.careContextDisplay;
+      state.careContextDeisplay;
     setIsFormValid(isValid);
   }, [state]);
 
@@ -112,8 +127,8 @@ const LinkRecordModal = () => {
                     </h3>
                     <div>
                       <CustomInput2
-                        value={state.careContextDisplay}
-                        name={"careContextDisplay"}
+                        value={state.careContextDeisplay}
+                        name={"careContextDeisplay"}
                         onChange={handleInput}
                       />
                     </div>

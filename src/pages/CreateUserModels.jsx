@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { createUserMode } from "../features/counter/userModeSlice";
 import InitiateAuthModal from "../components/InitiateAuthModal";
 import VerifyOTPModal from "../components/VerifyOTPModal";
-// import LinkRecordModal from "../components/linkRecordModal";
+import LinkRecordModal from "../components/LinkRecordModal";
 import axios from "axios";
 
 const init = {
@@ -31,13 +31,13 @@ const CreateUserModels = () => {
     window.initiate_auth.showModal();
     const eventSource = new EventSource("http://localhost:3000/sse");
     eventSource.onmessage = ({ data }) => {
-      console.log("this is the message received", data);
-      if (data.length === 1) {
+      //console.log("this is the message received", data);
+      if (data) {
+        dispatch(createUserMode(JSON.parse(data)));
+        console.log(state);
         console.log(data);
-        dispatch(createUserMode(data));
       }
     };
-    console.log(state);
 
     await axios
       .post("http://localhost:3000/fetchUserModes", {
@@ -130,7 +130,7 @@ const CreateUserModels = () => {
 
       <InitiateAuthModal oldValue={state} />
       <VerifyOTPModal />
-      {/* <LinkRecordModal /> */}
+      <LinkRecordModal />
     </>
   );
 };
