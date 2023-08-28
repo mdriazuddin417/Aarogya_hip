@@ -18,10 +18,9 @@ const init = {
 };
 
 const CreateUserModels = () => {
-  const navigation = useNavigate();
-  const dispatch = useDispatch();
   const [state, setState] = useState({ ...init });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [authModeValue, setAuthModeValue] = useState([]);
   const handleInput = (e) => {
     const { name, value } = e.target;
 
@@ -47,8 +46,6 @@ const CreateUserModels = () => {
         console.error("this is the error", error);
       });
 
-    window.initiate_auth.showModal();
-    dispatch(createUserMode(state));
     setState({ ...init });
   };
 
@@ -57,12 +54,11 @@ const CreateUserModels = () => {
       "https://f1bc-223-233-73-35.ngrok-free.app/sse"
     );
     eventSource.onmessage = ({ data }) => {
-      // const message = document.createElement("li");
-      // message.innerText = "New message: " + data;
-      // document.body.appendChild(message);
       console.log("this is the message received", data);
       if (data) {
         console.log(data);
+        setAuthModeValue(data);
+        window.initiate_auth.showModal();
       }
       setTimeout(() => {
         eventSource.close();
@@ -147,7 +143,7 @@ const CreateUserModels = () => {
         </div>
       </div>
 
-      <InitiateAuthModal />
+      <InitiateAuthModal oldValue={state} authModeValue={authModeValue[0]} />
       <VerifyOTPModal />
       <LinkRecordModal />
     </>

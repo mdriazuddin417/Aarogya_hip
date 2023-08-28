@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
-import { useNavigate } from "react-router-dom";
 
 const init = {
   healthId: "",
-  purpose: "",
-  HipId: "",
   authMode: "",
 };
 
-const InitiateAuthModal = () => {
-  const navigation = useNavigate();
-
+const InitiateAuthModal = ({ oldValue, authModeValue }) => {
   const [state, setState] = useState({ ...init });
   const [isFormValid, setIsFormValid] = useState(false);
+
   const handleInput = (e) => {
     const { name, value } = e.target;
 
@@ -23,10 +19,14 @@ const InitiateAuthModal = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log(state);
-    window.verify_otp.showModal();
+  const body = {
+    ...oldValue,
+    authMode: state.authMode,
+  };
 
+  const handleSubmit = () => {
+    // window.verify_otp.showModal();
+    console.log(body);
     setState({ ...init });
   };
   useEffect(() => {
@@ -49,59 +49,24 @@ const InitiateAuthModal = () => {
                   Initiate User Models
                 </h1>
               </div>
-              <div className="space-y-5 w-full">
-                <div className="grid md:grid-cols-2 grid-cols-1">
-                  <div className=" lg:w-[60%]">
-                    <h3 className="text-lg font-semibold">Health ID</h3>
-                    <p className="desc">
-                      This will be used for reference only by yourself and the
-                      health id.
-                    </p>
-                  </div>
-                  <div>
-                    <CustomInput2
-                      value={state.healthId}
-                      name={"healthId"}
-                      onChange={handleInput}
-                    />
-                  </div>
-                </div>
-                <hr />
-                <div className="grid md:grid-cols-2 grid-cols-1">
-                  <div className=" lg:w-[60%]">
-                    <h3 className="text-lg font-semibold">Purpose</h3>
-                    <p className="desc">
-                      This will be used for reference only by yourself and the
-                      Purpose.
-                    </p>
-                  </div>
-                  <div>
-                    <CustomInput2
-                      value={state.purpose}
-                      name={"purpose"}
-                      onChange={handleInput}
-                    />
-                  </div>
-                </div>
-              </div>
-              <hr />
+
               <div className="grid md:grid-cols-2 grid-cols-1">
                 <div className=" lg:w-[60%]">
-                  <h3 className="text-lg font-semibold">HIP ID </h3>
+                  <h3 className="text-lg font-semibold">Health ID</h3>
                   <p className="desc">
-                    This will be used for reference only by yourself and the HIP
-                    ID.
+                    This will be used for reference only by yourself and the
+                    health id.
                   </p>
                 </div>
                 <div>
                   <CustomInput2
-                    value={state.HipId}
-                    name={"HipId"}
-                    onChange={handleInput}
+                    value={authModeValue?.healthID}
+                    name={"healthId"}
                   />
                 </div>
               </div>
               <hr />
+
               <div className="grid md:grid-cols-2 grid-cols-1">
                 <div className=" lg:w-[60%]">
                   <h3 className="text-lg font-semibold">Auth Mode </h3>
@@ -111,11 +76,20 @@ const InitiateAuthModal = () => {
                   </p>
                 </div>
                 <div>
-                  <CustomInput2
-                    value={state.authMode}
-                    name={"authMode"}
+                  <select
                     onChange={handleInput}
-                  />
+                    name="authMode"
+                    className="select select-bordered w-full "
+                  >
+                    <option disabled selected>
+                      Choose auth modes
+                    </option>
+                    {authModeValue?.map((item, index) => (
+                      <option key={index} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="flex justify-end items-center ">
