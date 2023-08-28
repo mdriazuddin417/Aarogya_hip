@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { createUserMode } from "../features/counter/userModeSlice";
 import InitiateAuthModal from "../components/InitiateAuthModal";
 import VerifyOTPModal from "../components/VerifyOTPModal";
-import LinkRecordModal from "../components/linkRecordModal";
+// import LinkRecordModal from "../components/linkRecordModal";
 import axios from "axios";
 
 const init = {
@@ -31,10 +31,21 @@ const CreateUserModels = () => {
   };
 
   const handleSubmit = async () => {
+    window.initiate_auth.showModal();
+    const eventSource = new EventSource(
+      "http://localhost:3000/sse"
+    );
+    eventSource.onmessage = ({ data }) => {
+      console.log("this is the message received", data);
+      if (data.length === 1) {
+        console.log(data);
+        setAuthModeValue(data);
+      }
+    }
     console.log(state);
 
     await axios
-      .post("https://f1bc-223-233-73-35.ngrok-free.app/fetchUserModes", {
+      .post("http://localhost:3000/fetchUserModes", {
         ...state,
         authMode: "",
       })
@@ -46,26 +57,27 @@ const CreateUserModels = () => {
         console.error("this is the error", error);
       });
 
-    setState({ ...init });
+    // setState({ ...init });
+
   };
 
-  useEffect(() => {
-    const eventSource = new EventSource(
-      "https://f1bc-223-233-73-35.ngrok-free.app/sse"
-    );
-    eventSource.onmessage = ({ data }) => {
-      console.log("this is the message received", data);
-      if (data) {
-        console.log(data);
-        setAuthModeValue(data);
-        window.initiate_auth.showModal();
-      }
-      setTimeout(() => {
-        eventSource.close();
-        console.log("this event is closed now");
-      }, 10000);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const eventSource = new EventSource(
+  //     "http://localhost:3000/sse"
+  //   );
+  //   eventSource.onmessage = ({ data }) => {
+  //     console.log("this is the message received", data);
+  //     if (data.length === 1) {
+  //       console.log(data);
+  //       setAuthModeValue(data);
+  //       window.initiate_auth.showModal();
+  //     }
+  //     // setTimeout(() => {
+  //     //   eventSource.close();
+  //     //   console.log("this event is closed now");
+  //     // }, 10000);
+  //   };
+  // }, [authModeValue]);
 
   useEffect(() => {
     const isValid = state.healthId && state.purpose && state.HipId;
@@ -145,7 +157,7 @@ const CreateUserModels = () => {
 
       <InitiateAuthModal oldValue={state} authModeValue={authModeValue[0]} />
       <VerifyOTPModal />
-      <LinkRecordModal />
+      {/* <LinkRecordModal /> */}
     </>
   );
 };

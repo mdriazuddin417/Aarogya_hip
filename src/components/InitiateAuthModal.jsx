@@ -23,7 +23,7 @@ const InitiateAuthModal = ({ oldValue, authModeValue }) => {
     ...oldValue,
     authMode: state.authMode,
   };
-
+  console.log("body from initiaAuth",body);
   const handleSubmit = () => {
     // window.verify_otp.showModal();
     console.log(body);
