@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
-
 import CustomInput2 from "../utils/CustomInput2";
 import { useDispatch } from "react-redux";
 import { createUserMode } from "../features/counter/userModeSlice";
@@ -20,7 +17,7 @@ const init = {
 const CreateUserModels = () => {
   const [state, setState] = useState({ ...init });
   const [isFormValid, setIsFormValid] = useState(false);
-  const [authModeValue, setAuthModeValue] = useState([]);
+  const dispatch = useDispatch();
   const handleInput = (e) => {
     const { name, value } = e.target;
 
@@ -32,16 +29,14 @@ const CreateUserModels = () => {
 
   const handleSubmit = async () => {
     window.initiate_auth.showModal();
-    const eventSource = new EventSource(
-      "http://localhost:3000/sse"
-    );
+    const eventSource = new EventSource("http://localhost:3000/sse");
     eventSource.onmessage = ({ data }) => {
       console.log("this is the message received", data);
       if (data.length === 1) {
         console.log(data);
-        setAuthModeValue(data);
+        dispatch(createUserMode(data));
       }
-    }
+    };
     console.log(state);
 
     await axios
@@ -56,29 +51,7 @@ const CreateUserModels = () => {
         console.log("inside error function");
         console.error("this is the error", error);
       });
-
-    // setState({ ...init });
-
   };
-
-  // useEffect(() => {
-  //   const eventSource = new EventSource(
-  //     "http://localhost:3000/sse"
-  //   );
-  //   eventSource.onmessage = ({ data }) => {
-  //     console.log("this is the message received", data);
-  //     if (data.length === 1) {
-  //       console.log(data);
-  //       setAuthModeValue(data);
-  //       window.initiate_auth.showModal();
-  //     }
-  //     // setTimeout(() => {
-  //     //   eventSource.close();
-  //     //   console.log("this event is closed now");
-  //     // }, 10000);
-  //   };
-  // }, [authModeValue]);
-
   useEffect(() => {
     const isValid = state.healthId && state.purpose && state.HipId;
     setIsFormValid(isValid);
@@ -155,7 +128,7 @@ const CreateUserModels = () => {
         </div>
       </div>
 
-      <InitiateAuthModal oldValue={state} authModeValue={authModeValue[0]} />
+      <InitiateAuthModal oldValue={state} />
       <VerifyOTPModal />
       {/* <LinkRecordModal /> */}
     </>
