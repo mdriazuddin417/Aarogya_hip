@@ -50,7 +50,12 @@ const LinkedRecordsTable = ({ data }) => {
                     {item.careContextDisplay}
                   </div>
                 </td>
-                <td className="td link {item.link}"></td>
+                <td className="td link">
+                <div className="flex items-center td">
+                    {item.link}
+                  </div>
+                </td>
+                
               </tr>
             ))}
           </tbody>
