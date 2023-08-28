@@ -31,31 +31,18 @@ const LinkedRecordsTable = ({ data }) => {
           </thead>
           <tbody>
             {database?.map((item, index) => (
-              <tr key={item._id} className="cursor-pointer">
+              <tr key={item._id}>
                 <td className="font-bold text-gray-400 "> {index + 1}</td>
                 <td className=" td">{item.patientID}</td>
                 <td className=" td">{item.patientRefNumber}</td>
+                <td className="td">{item.patientDisplay}</td>
+                <td className="td">{item.careContextRefNumber}</td>
+                <td className=" td">{item.careContextDisplay}</td>
                 <td className="">
-                  <div className="flex items-center td">
-                    {item.patientDisplay}
-                  </div>
-                </td>
-                <td className="">
-                  <div className="flex items-center td">
-                    {item.careContextRefNumber}
-                  </div>
-                </td>
-                <td className="">
-                  <div className="flex items-center td">
-                    {item.careContextDisplay}
-                  </div>
-                </td>
-                <td className="td link">
-                <div className="flex items-center td">
+                  <div className="bg-green-500 px-2 py-1 text-white text-sm rounded">
                     {item.link}
                   </div>
                 </td>
-                
               </tr>
             ))}
           </tbody>
