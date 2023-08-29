@@ -10,10 +10,10 @@ const DataFetch = () => {
   const getData = async () => {
     setLoading(true);
     await axios
-      .post(` ${import.meta.env.VITE_BASE_URL}/fetchConsentIDHIP`)
+      .post('http://localhost:3000/fetchConsentIDHIP')
       .then((response) => {
         if (response.status === 202) {
-          setData(response.data);
+          setData(response.data.data);
           setLoading(false);
         }
       })
@@ -22,7 +22,7 @@ const DataFetch = () => {
         setLoading(false);
       });
     setLoading(false);
-    setData(hiUConsent);
+    //setData(hiUConsent);
   };
 
   return (

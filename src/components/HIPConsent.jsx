@@ -11,7 +11,7 @@ const HIPConsent = ({ data }) => {
   const handleSubmit = async () => {
     setLoading(true);
     await axios
-      .post(` ${import.meta.env.VITE_BASE_URL}/datapush`, {
+      .post('http://localhost:3000/datapush', {
         consentID: consentId,
       })
       .then((response) => {
