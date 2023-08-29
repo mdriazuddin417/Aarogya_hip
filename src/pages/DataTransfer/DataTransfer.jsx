@@ -10,7 +10,7 @@ const DataFetch = () => {
   const getData = async () => {
     setLoading(true);
     await axios
-      .post('http://localhost:3000/fetchConsentIDHIP')
+      .post("http://localhost:3000/fetchConsentIDHIP")
       .then((response) => {
         if (response.status === 202) {
           setData(response.data.data);
@@ -22,19 +22,19 @@ const DataFetch = () => {
         setLoading(false);
       });
     setLoading(false);
-    //setData(hiUConsent);
   };
 
   return (
     <>
       <div className="w-full p-5">
         {data.length > 0 ? (
-          <HIPConsent data={data[0]} />
+          <HIPConsent data={data} />
         ) : (
           <div className="h-[80vh] flex  justify-center items-center w-full">
             <button
               onClick={getData}
-              className="btn btn-primary btn-md font-bold flex gap-3 ml-5 "
+              disabled={loading}
+              className="btn btn-primary btn-md font-bold flex gap-3 ml-5 disabled:bg-gray-200 "
             >
               {loading ? (
                 <div className="flex items-center gap-4">
