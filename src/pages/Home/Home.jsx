@@ -1,4 +1,4 @@
-import { BiHomeAlt, BiReceipt } from "react-icons/bi";
+import { BiHomeAlt, BiReceipt, BiTask } from "react-icons/bi";
 import { NavLink, Outlet } from "react-router-dom";
 import Header from "../../components/shared/Header";
 
@@ -36,6 +36,14 @@ const Home = () => {
                   <BiReceipt className="text-xl" />
                 </span>
                 Linked Records
+              </NavLink>
+            </li>
+            <li id="sidebar">
+              <NavLink to={"/data_transfer"}>
+                <span>
+                  <BiTask className="text-xl" />
+                </span>
+                Data Transfer
               </NavLink>
             </li>
           </ul>
