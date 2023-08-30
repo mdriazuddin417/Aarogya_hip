@@ -92,11 +92,28 @@ const CreateUserModels = () => {
               </p>
             </div>
             <div>
-              <CustomInput2
-                value={state.purpose}
-                name={"purpose"}
-                onChange={handleInput}
-              />
+              
+               <select
+               //defaultValue={'KYC_AND_LINK'}
+          name={"purpose"}
+          onChange={handleInput}
+          className="select select-primary w-[500px]"
+         
+        >
+          <option disabled selected>
+            choose consent ID
+          </option>
+          <option value={'KYC_AND_LINK'}>
+          KYC_AND_LINK
+          </option>
+          {/* <option value={'KYC'}>
+          KYC_AND_LINK
+          </option>
+          <option value={'KYC_AND_LINK'}>
+          KYC_AND_LINK
+          </option> */}
+          
+        </select>
             </div>
           </div>
         </div>

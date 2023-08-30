@@ -14,6 +14,7 @@ const HIPConsent = ({ data }) => {
       })
       .then((response) => {
         console.log(response.data);
+        console.log("this is consent",selectConsent);
         setLoading(false);
       })
       .catch((error) => {
@@ -35,7 +36,7 @@ const HIPConsent = ({ data }) => {
       <div className="flex justify-end items-center my-5">
         <select
           defaultValue={content.consentId}
-          className="select select-primary w-full max-w-xs"
+          className="select select-primary w-[500px]"
           onChange={(e) => setSelectConsent(e.target.value)}
         >
           <option disabled selected>
@@ -44,7 +45,7 @@ const HIPConsent = ({ data }) => {
           {data.length > 0 &&
             data.map((item, index) => (
               <option key={index} value={item.consentId}>
-                consent ID ({item?.patientId})
+                {item.consentId}({item?.patientId})
               </option>
             ))}
         </select>
