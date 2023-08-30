@@ -1,4 +1,8 @@
+import { useState } from "react";
+import HealthRecordsData from "./HealthRecordsData";
+
 const LinkedRecordsTable = ({ data }) => {
+  const [healthRecords, setHealthRecords] = useState([]);
   const database = data.reduce((acc, curr) => {
     acc = [
       ...acc,
@@ -6,14 +10,12 @@ const LinkedRecordsTable = ({ data }) => {
         _id: curr._id.$oid,
         link: curr.Linked,
         patientID: curr.PatientHealthId,
-        patientRefNumber: curr.LinkedHealthRecords[0].patientRefNumber,
-        patientDisplay: curr.LinkedHealthRecords[0].patientDisplay,
-        careContextRefNumber: curr.LinkedHealthRecords[0].careContextRefNumber,
-        careContextDisplay: curr.LinkedHealthRecords[0].careContextDeisplay,
+        LinkedHealthRecords: curr.LinkedHealthRecords,
       },
     ];
     return acc;
   }, []);
+
   return (
     <div className="">
       <div className="overflow-x-auto ">
@@ -22,11 +24,8 @@ const LinkedRecordsTable = ({ data }) => {
             <tr className="bg-primary">
               <th className="th"></th>
               <th className="th">Patient ID</th>
-              <th className="th">Patient RefNumber</th>
-              <th className="th">Patient Display</th>
-              <th className="th">CareContext RefNumber</th>
-              <th className="th">CareContext Display</th>
               <th className="th">Linked</th>
+              <th className="th">View Health Records</th>
             </tr>
           </thead>
           <tbody>
@@ -34,20 +33,27 @@ const LinkedRecordsTable = ({ data }) => {
               <tr key={item._id}>
                 <td className="font-bold text-gray-400 "> {index + 1}</td>
                 <td className=" td">{item.patientID}</td>
-                <td className=" td">{item.patientRefNumber}</td>
-                <td className="td">{item.patientDisplay}</td>
-                <td className="td">{item.careContextRefNumber}</td>
-                <td className=" td">{item.careContextDisplay}</td>
-                <td className="">
+
+                <td className="flex justify-start">
                   <div className="bg-green-500 px-2 py-1 text-white text-sm rounded">
                     {item.link}
                   </div>
+                </td>
+                <td
+                  className=" link td"
+                  onClick={() => {
+                    setHealthRecords(item.LinkedHealthRecords);
+                    return window.health_records.showModal();
+                  }}
+                >
+                  View Records
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <HealthRecordsData data={healthRecords} />
     </div>
   );
 };

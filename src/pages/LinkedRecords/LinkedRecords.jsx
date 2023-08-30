@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LinkedRecordsTable from "../../components/LinkedRecordsTable";
 import axios from "axios";
+import { consentList } from "../../constant/consentLists";
 const Consent = () => {
   const [data, setdata] = useState([]);
   const handlinkedRecords = async () => {
