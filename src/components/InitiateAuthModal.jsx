@@ -8,6 +8,10 @@ const InitiateAuthModal = ({ oldValue }) => {
 
   const mode = useSelector((state) => state.mode.userModes[0]);
   console.log("value of mode", mode);
+  const filteredMode = mode?.authModes?.filter(
+    (item) => item !== "DEMOGRAPHICS" && item !== "PASSWORD"
+  );
+
   const body = {
     ...oldValue,
     authMode: auth,
@@ -81,7 +85,7 @@ const InitiateAuthModal = ({ oldValue }) => {
                         Choose auth modes
                       </option>
                       {mode &&
-                        mode.authModes.map((item, index) => (
+                        filteredMode?.map((item, index) => (
                           <option key={index} value={item}>
                             {item}
                           </option>
