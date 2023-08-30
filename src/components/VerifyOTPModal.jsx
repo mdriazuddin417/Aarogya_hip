@@ -3,23 +3,24 @@ import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 const VerifyOTPModal = () => {
   const [otp, setOtp] = useState("");
-  const handleOTP = async() => {
+  const handleOTP = async () => {
     window.link_records.showModal();
+
     await axios
-    .post("http://localhost:3000/verifyOtp", {
-      otp:otp
-    })
-    .then((response) => {
-      if(response.status === 202){
-        console.log(response.data.message);
-        //window.verify_otp.showModal();
-      }
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log("inside error function");
-      console.error("this is the error", error);
-    });
+      .post(`${import.meta.env.VITE_BASE_URL}/verifyOtp`, {
+        otp: otp,
+      })
+      .then((response) => {
+        if (response.status === 202) {
+          console.log(response.data.message);
+          //window.verify_otp.showModal();
+        }
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("inside error function");
+        console.error("this is the error", error);
+      });
   };
   return (
     <div>

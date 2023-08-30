@@ -9,12 +9,12 @@ const HIPConsent = ({ data }) => {
   const handleSubmit = async () => {
     setLoading(true);
     await axios
-      .post("http://localhost:3000/datapush", {
+      .post(` ${import.meta.env.VITE_BASE_URL}/datapush`, {
         consentID: selectConsent,
       })
       .then((response) => {
         console.log(response.data);
-        console.log("this is consent",selectConsent);
+        console.log("this is consent", selectConsent);
         setLoading(false);
       })
       .catch((error) => {

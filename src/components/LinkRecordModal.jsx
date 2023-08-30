@@ -20,16 +20,16 @@ const LinkRecordModal = () => {
     });
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     console.log(state);
     await axios
-    .post("http://localhost:3000/linkRecord", {
-     ...state
-    })
-    .then((response) => {
-      if(response.status === 202){
-        console.log(response.data.message);
-        //window.verify_otp.showModal();
+      .post(`${import.meta.env.VITE_BASE_URL}/linkRecord`, {
+        ...state,
+      })
+      .then((response) => {
+        if (response.status === 202) {
+          console.log(response.data.message);
+          //window.verify_otp.showModal();
         }
         console.log(response.data);
       })

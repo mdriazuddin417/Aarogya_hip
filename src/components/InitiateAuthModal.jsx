@@ -13,9 +13,10 @@ const InitiateAuthModal = ({ oldValue }) => {
     authMode: auth,
   };
   console.log("body from initiaAuth", body);
+
   const handleSubmit = async () => {
     await axios
-      .post("http://localhost:3000/initiateAuth", {
+      .post(`${import.meta.env.VITE_BASE_URL}/initiateAuth`, {
         ...body,
       })
       .then((response) => {

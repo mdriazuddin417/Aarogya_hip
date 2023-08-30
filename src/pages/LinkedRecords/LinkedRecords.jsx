@@ -7,7 +7,7 @@ const Consent = () => {
   const handlinkedRecords = async () => {
     //window.link_records.showModal();
     await axios
-      .post("http://localhost:3000/showLinkedRecord")
+      .post(` ${import.meta.env.VITE_BASE_URL}/showLinkedRecord`)
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);

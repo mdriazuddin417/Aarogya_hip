@@ -10,7 +10,7 @@ const DataFetch = () => {
   const getData = async () => {
     setLoading(true);
     await axios
-      .post("http://localhost:3000/fetchConsentIDHIP")
+      .post(` ${import.meta.env.VITE_BASE_URL}/fetchConsentIDHIP`)
       .then((response) => {
         if (response.status === 202) {
           setData(response.data.data);

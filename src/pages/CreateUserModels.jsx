@@ -26,10 +26,11 @@ const CreateUserModels = () => {
       [name]: value,
     });
   };
-
   const handleSubmit = async () => {
     window.initiate_auth.showModal();
-    const eventSource = new EventSource("http://localhost:3000/sse");
+    const eventSource = new EventSource(
+      ` ${import.meta.env.VITE_BASE_URL}/sse`
+    );
     eventSource.onmessage = ({ data }) => {
       //console.log("this is the message received", data);
       if (data) {
@@ -40,7 +41,7 @@ const CreateUserModels = () => {
     };
 
     await axios
-      .post("http://localhost:3000/fetchUserModes", {
+      .post(` ${import.meta.env.VITE_BASE_URL}/fetchUserModes`, {
         ...state,
         authMode: "",
       })
@@ -92,28 +93,23 @@ const CreateUserModels = () => {
               </p>
             </div>
             <div>
-              
-               <select
-               //defaultValue={'KYC_AND_LINK'}
-          name={"purpose"}
-          onChange={handleInput}
-          className="select select-primary w-[500px]"
-         
-        >
-          <option disabled selected>
-            choose consent ID
-          </option>
-          <option value={'KYC_AND_LINK'}>
-          KYC_AND_LINK
-          </option>
-          {/* <option value={'KYC'}>
+              <select
+                //defaultValue={'KYC_AND_LINK'}
+                name={"purpose"}
+                onChange={handleInput}
+                className="select select-primary w-full"
+              >
+                <option disabled selected>
+                  choose consent ID
+                </option>
+                <option value={"KYC_AND_LINK"}>KYC_AND_LINK</option>
+                {/* <option value={'KYC'}>
           KYC_AND_LINK
           </option>
           <option value={'KYC_AND_LINK'}>
           KYC_AND_LINK
           </option> */}
-          
-        </select>
+              </select>
             </div>
           </div>
         </div>
