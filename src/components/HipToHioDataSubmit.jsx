@@ -39,6 +39,7 @@ const HipToHioDataSubmit = ({ consentID }) => {
     Practitioner: practitioner,
   };
   const handleSubmit = async () => {
+    console.log(body);
     setLoading(true);
     toast.success("successfully!");
     await axios
