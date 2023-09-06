@@ -1,28 +1,10 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import React, { useState } from "react";
+import HipToHioDataSubmit from "./HipToHioDataSubmit";
 
 const HIPConsent = ({ data }) => {
-  const [loading, setLoading] = useState(false);
-  const [selectConsent, setSelectConsent] = useState("");
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    await axios
-      .post(` ${import.meta.env.VITE_BASE_URL}/datapush`, {
-        consentID: selectConsent,
-      })
-      .then((response) => {
-        console.log(response.data);
-        console.log("this is consent", selectConsent);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("this is the error", error);
-        setLoading(false);
-      });
-    setLoading(false);
-  };
+  const [selectConsent, setSelectConsent] = useState(data[0].consentId);
 
   let content;
   if (selectConsent) {
@@ -30,7 +12,6 @@ const HIPConsent = ({ data }) => {
   } else {
     content = data[0];
   }
-  console.log(content);
   return (
     <div>
       <div className="flex justify-end items-center my-5">
@@ -70,20 +51,13 @@ const HIPConsent = ({ data }) => {
       </div>
       <div className="flex justify-center items-center md:mt-10 mt-5">
         <button
-          onClick={handleSubmit}
-          disabled={loading}
+          onClick={() => window.hip_data.showModal()}
           className="btn btn-primary btn-md font-bold flex gap-3 ml-5 disabled:bg-gray-200"
         >
-          {loading ? (
-            <div className="flex items-center gap-4">
-              <span className="loading loading-spinner loading-sm"></span>
-              <p>Loading...</p>
-            </div>
-          ) : (
-            "Submit"
-          )}
+          Go to Submit
         </button>
       </div>
+      <HipToHioDataSubmit consentID={selectConsent} />
     </div>
   );
 };
