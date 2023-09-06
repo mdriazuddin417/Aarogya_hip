@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LinkedRecordsTable from "../../components/LinkedRecordsTable";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { consentList } from "../../constant/consentLists";
 const Consent = () => {
   const [data, setdata] = useState([]);

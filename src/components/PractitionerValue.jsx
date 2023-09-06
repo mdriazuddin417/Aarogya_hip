@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
 import { MdDelete } from "react-icons/md";
 
-const PractitionerValue = ({ practitioner, setPractitioner, init }) => {
+const PractitionerValue = ({
+  practitioner,
+  setPractitioner,
+  init,
+  medications,
+}) => {
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedMedications = [...practitioner];
@@ -39,7 +44,7 @@ const PractitionerValue = ({ practitioner, setPractitioner, init }) => {
             key={index}
             className="flex justify-start items-center gap-5 flex-wrap w-auto"
           >
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow ">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Doctor Name
               </h1>
@@ -50,7 +55,7 @@ const PractitionerValue = ({ practitioner, setPractitioner, init }) => {
                 value={item.doctorName}
               />
             </div>
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow ">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Doctor ID
               </h1>
@@ -61,7 +66,7 @@ const PractitionerValue = ({ practitioner, setPractitioner, init }) => {
                 value={item.doctorId}
               />
             </div>
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow ">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Authored Time
               </h1>

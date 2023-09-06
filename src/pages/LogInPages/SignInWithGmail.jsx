@@ -2,7 +2,7 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 // import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 // import auth from "../../firebase.init";
-// import { toast } from "react-toastify";
+// import { toast } from "react-hot-toast"
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SignInWithGmail = () => {

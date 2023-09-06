@@ -5,7 +5,7 @@ import "./authentication.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 // import auth from "../../firebase.init";
-// import { toast } from "react-toastify";
+// import { toast } from "react-hot-toast"
 import logo from "../../assets/logo.png";
 import SideText from "./SideText";
 const SignUpWithEmail = () => {

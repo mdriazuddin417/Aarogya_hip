@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const init = {
   patientHealthId: "",
   patientRefNumber: "",

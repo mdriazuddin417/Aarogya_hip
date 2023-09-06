@@ -4,13 +4,14 @@ import axios from "axios";
 import MedicationValue from "./MedicationValue";
 import PractitionerValue from "./PractitionerValue";
 import PatientValue from "./PatientValue";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const medicationInit = {
   medicationName: "",
   dosage: "",
   doctorName: "",
   doctorId: "",
+  authoredOn: "",
 };
 
 const patientInit = {
@@ -19,22 +20,41 @@ const patientInit = {
   DOB: "",
   ID: "",
 };
-const practitionerInit = {
-  doctorName: "",
-  doctorId: "",
-  authoredOn: "",
-};
 
 const HipToHioDataSubmit = ({ consentID }) => {
   const [medications, setMedications] = useState([medicationInit]);
   const [state, setState] = useState({ ...patientInit });
-  const [practitioner, setPractitioner] = useState([practitionerInit]);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const practitioner = medications.reduce((acc, curr) => {
+    acc = [
+      ...acc,
+      {
+        doctorName: curr.doctorName,
+        doctorId: curr.doctorId,
+        authoredOn: curr.authoredOn,
+      },
+    ];
+    return acc;
+  }, []);
+
+  const newMedications = medications.reduce((acc, curr) => {
+    acc = [
+      ...acc,
+      {
+        medicationName: curr.medicationName,
+        dosage: curr.dosage,
+        doctorName: curr.doctorName,
+        doctorId: curr.doctorId,
+      },
+    ];
+    return acc;
+  }, []);
+
   const body = {
     consentID: consentID,
-    medication: medications,
+    medication: newMedications,
     patient: state,
     Practitioner: practitioner,
   };
@@ -64,18 +84,13 @@ const HipToHioDataSubmit = ({ consentID }) => {
     const isDisabled =
       medications.some((med) =>
         Object.values(med).some((value) => value === "")
-      ) ||
-      practitioner.some((med) =>
-        Object.values(med).some((value) => value === "")
-      ) ||
-      Object.values(state).some((value) => value === "");
+      ) || Object.values(state).some((value) => value === "");
 
     setIsSubmitDisabled(isDisabled);
-  }, [medications, state, practitioner]);
+  }, [medications, state]);
   const clear = () => {
     setMedications([medicationInit]);
     setState({ ...patientInit });
-    setPractitioner([practitionerInit]);
   };
 
   return (
@@ -101,11 +116,12 @@ const HipToHioDataSubmit = ({ consentID }) => {
                   init={medicationInit}
                 />
                 <PatientValue state={state} setState={setState} />
-                <PractitionerValue
+                {/* <PractitionerValue
                   practitioner={practitioner}
                   setPractitioner={setPractitioner}
                   init={practitionerInit}
-                />
+                  medications={medications}
+                /> */}
               </div>
 
               <div className="flex justify-end items-center ">

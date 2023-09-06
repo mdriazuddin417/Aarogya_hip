@@ -37,9 +37,9 @@ const MedicationValue = ({ medications, setMedications, init }) => {
         {medications.map((item, index) => (
           <div
             key={index}
-            className="flex justify-start items-center gap-5 flex-wrap w-auto"
+            className="relative grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-3 shadow-lg rounded border border-gray-200 mt-2 p-5"
           >
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow md:flex-grow-0">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Medication Name
               </h1>
@@ -50,7 +50,7 @@ const MedicationValue = ({ medications, setMedications, init }) => {
                 value={item.medicationName}
               />
             </div>
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow md:flex-grow-0">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Dosage
               </h1>
@@ -61,7 +61,7 @@ const MedicationValue = ({ medications, setMedications, init }) => {
                 value={item.dosage}
               />
             </div>
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow md:flex-grow-0">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Doctor Name
               </h1>
@@ -72,7 +72,7 @@ const MedicationValue = ({ medications, setMedications, init }) => {
                 value={item.doctorName}
               />
             </div>
-            <div className="sm:w-auto w-full flex-grow">
+            <div className="sm:w-auto w-full flex-grow md:flex-grow-0">
               <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
                 Doctor ID
               </h1>
@@ -83,10 +83,22 @@ const MedicationValue = ({ medications, setMedications, init }) => {
                 value={item.doctorId}
               />
             </div>
+            <div className="sm:w-auto w-full flex-grow ">
+              <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
+                Authored Time
+              </h1>
+              <CustomInput2
+                placeholder={"Authored time"}
+                name={"authoredOn"}
+                onChange={(e) => handleChange(e, index)}
+                value={item.authoredOn}
+                type={"date"}
+              />
+            </div>
             {medications.length > 1 && (
               <div
                 onClick={() => removeMedication(index)}
-                className=" mt-[20px] "
+                className=" absolute top-2 right-2"
               >
                 <MdDelete className="text-red-600 cursor-pointer text-xl" />
               </div>

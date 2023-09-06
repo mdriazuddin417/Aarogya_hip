@@ -6,7 +6,7 @@ import { createUserMode } from "../features/counter/userModeSlice";
 import InitiateAuthModal from "../components/InitiateAuthModal";
 import VerifyOTPModal from "../components/VerifyOTPModal";
 import LinkRecordModal from "../components/LinkRecordModal";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 
 const init = {

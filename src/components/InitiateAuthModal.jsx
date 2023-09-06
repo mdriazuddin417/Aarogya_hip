@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const InitiateAuthModal = ({ oldValue }) => {
   const [auth, setAuth] = useState("");
 

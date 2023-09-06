@@ -3,9 +3,9 @@ import { useState } from "react";
 
 import { hiUConsent } from "../../constant/data";
 import HIPConsent from "../../components/HIPConsent";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const DataFetch = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(hiUConsent);
   const [loading, setLoading] = useState(false);
 
   const getData = async () => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 const VerifyOTPModal = () => {
   const [otp, setOtp] = useState("");
   const handleOTP = async () => {

@@ -14,7 +14,7 @@ const PatientValue = ({ state, setState }) => {
   return (
     <div>
       <div className="space-y-3">
-        <div className="flex justify-start gap-5 items-center flex-wrap w-auto">
+        <div className="relative grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-3 shadow-lg rounded border border-gray-200 mt-2 p-5">
           <div className="sm:w-auto w-full flex-grow">
             <h1 className="text-[14px] mb-1 text-gray-700 font-medium">
               Patient Name
