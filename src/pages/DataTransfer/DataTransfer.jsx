@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { hiUConsent } from "../../constant/data";
 import HIPConsent from "../../components/HIPConsent";
+import { toast } from "react-toastify";
 const DataFetch = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ const DataFetch = () => {
       })
       .catch((error) => {
         console.error("this is the error", error);
+        toast.error("Something wrong ? ");
         setLoading(false);
       });
     setLoading(false);

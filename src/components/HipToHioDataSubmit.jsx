@@ -52,6 +52,7 @@ const HipToHioDataSubmit = ({ consentID }) => {
       })
       .catch((error) => {
         console.error("this is the error", error);
+        toast.error("Something wrong ? ");
         setLoading(false);
       });
     setLoading(false);

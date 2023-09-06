@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
+import { toast } from "react-toastify";
 const VerifyOTPModal = () => {
   const [otp, setOtp] = useState("");
   const handleOTP = async () => {
@@ -13,11 +14,13 @@ const VerifyOTPModal = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
+          toast.success("OTP successfully verify!");
           //window.verify_otp.showModal();
         }
         console.log(response.data);
       })
       .catch((error) => {
+        toast.error("Something wrong ? ");
         console.log("inside error function");
         console.error("this is the error", error);
       });

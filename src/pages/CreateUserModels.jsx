@@ -6,6 +6,7 @@ import { createUserMode } from "../features/counter/userModeSlice";
 import InitiateAuthModal from "../components/InitiateAuthModal";
 import VerifyOTPModal from "../components/VerifyOTPModal";
 import LinkRecordModal from "../components/LinkRecordModal";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const init = {
@@ -36,6 +37,7 @@ const CreateUserModels = () => {
       if (data) {
         dispatch(createUserMode(JSON.parse(data)));
         console.log(state);
+        toast.error("Something wrong ? ");
         console.log(data);
       }
     };
@@ -51,6 +53,7 @@ const CreateUserModels = () => {
       .catch((error) => {
         console.log("inside error function");
         console.error("this is the error", error);
+        toast.error("Something wrong ? ");
       });
   };
   useEffect(() => {

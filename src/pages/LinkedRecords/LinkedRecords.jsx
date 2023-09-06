@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LinkedRecordsTable from "../../components/LinkedRecordsTable";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { consentList } from "../../constant/consentLists";
 const Consent = () => {
   const [data, setdata] = useState([]);
@@ -19,6 +20,7 @@ const Consent = () => {
       .catch((error) => {
         console.log("inside error function");
         console.error("this is the error", error);
+        toast.error("Something wrong ? ");
       });
   };
   return (

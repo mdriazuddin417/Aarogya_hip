@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomInput2 from "../utils/CustomInput2";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const InitiateAuthModal = ({ oldValue }) => {
   const [auth, setAuth] = useState("");
 
@@ -31,6 +31,7 @@ const InitiateAuthModal = ({ oldValue }) => {
         console.log(response.data);
       })
       .catch((error) => {
+        toast.error("Something wrong ? ");
         console.log("inside error function");
         console.error("this is the error", error);
       });
