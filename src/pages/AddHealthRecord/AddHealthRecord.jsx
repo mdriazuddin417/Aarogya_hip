@@ -79,19 +79,19 @@ const AddHealthRecord = () => {
                       />
                     </div>
                   </div>
-
                   <div className="">
                     <h3 className="text-lg font-semibold mb-2">
-                      Patient RefNumber{" "}
+                      CareContext Display
                     </h3>
                     <div>
                       <CustomInput2
-                        value={state.patientRefNumber}
-                        name={"patientRefNumber"}
+                        value={state.careContextDeisplay}
+                        name={"careContextDeisplay"}
                         onChange={handleInput}
                       />
                     </div>
                   </div>
+                  
                 </div>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
                   <div className="">
@@ -122,14 +122,15 @@ const AddHealthRecord = () => {
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
+                 
                   <div className="">
                     <h3 className="text-lg font-semibold mb-2">
-                      CareContext Display
+                      Patient RefNumber{" "}
                     </h3>
                     <div>
                       <CustomInput2
-                        value={state.careContextDeisplay}
-                        name={"careContextDeisplay"}
+                        value={state.patientRefNumber}
+                        name={"patientRefNumber"}
                         onChange={handleInput}
                       />
                     </div>
