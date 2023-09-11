@@ -78,7 +78,7 @@ const Login = () => {
 
             <div>
               <ReCAPTCHA
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                sitekey="6LdUnwYoAAAAAGtoiNEBQJiETNUW1fOoSjgwsx1O"
                 onChange={onChange}
               />
             </div>

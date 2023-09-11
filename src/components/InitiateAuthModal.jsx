@@ -5,9 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 const InitiateAuthModal = ({ oldValue }) => {
   const [auth, setAuth] = useState("");
-
   const mode = useSelector((state) => state.mode.userModes[0]);
-  console.log("value of mode", mode);
   const filteredMode = mode?.authModes?.filter(
     (item) => item !== "DEMOGRAPHICS" && item !== "PASSWORD"
   );
@@ -16,25 +14,8 @@ const InitiateAuthModal = ({ oldValue }) => {
     ...oldValue,
     authMode: auth,
   };
-  console.log("body from initiaAuth", body);
-
   const handleSubmit = async () => {
-    await axios
-      .post(`${import.meta.env.VITE_BASE_URL}/initiateAuth`, {
-        ...body,
-      })
-      .then((response) => {
-        if (response.status === 202) {
-          console.log(response.data.message);
-          window.verify_otp.showModal();
-        }
-        console.log(response.data);
-      })
-      .catch((error) => {
-        toast.error("Something wrong ? ");
-        console.log("inside error function");
-        console.error("this is the error", error);
-      });
+    window.verify_otp.showModal();
     console.log(body);
   };
 

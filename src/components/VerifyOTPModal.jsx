@@ -6,24 +6,8 @@ const VerifyOTPModal = () => {
   const [otp, setOtp] = useState("");
   const handleOTP = async () => {
     window.link_records.showModal();
-
-    await axios
-      .post(`${import.meta.env.VITE_BASE_URL}/verifyOtp`, {
-        otp: otp,
-      })
-      .then((response) => {
-        if (response.status === 202) {
-          console.log(response.data.message);
-          toast.success("OTP successfully verify!");
-          //window.verify_otp.showModal();
-        }
-        console.log(response.data);
-      })
-      .catch((error) => {
-        toast.error("Something wrong ? ");
-        console.log("inside error function");
-        console.error("this is the error", error);
-      });
+    toast.success("OTP successfully verify!");
+    
   };
   return (
     <div>

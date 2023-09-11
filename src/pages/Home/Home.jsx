@@ -46,6 +46,14 @@ const Home = () => {
                 Data Transfer
               </NavLink>
             </li>
+            <li id="sidebar">
+              <NavLink to={"/add_health_records"}>
+                <span>
+                  <BiTask className="text-xl" />
+                </span>
+                Add Health Records
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userModes: [],
+  userModes: [
+    {
+      _id: "64ec4ceecd204dc0d139568c",
+      healthID: "gautam_1999@sbx",
+      authModes: ["MOBILE_OTP", "DEMOGRAPHICS", "PASSWORD", "AADHAAR_OTP"],
+      __v: 0,
+    },
+  ],
   user: false,
 };
 

@@ -29,32 +29,6 @@ const CreateUserModels = () => {
   };
   const handleSubmit = async () => {
     window.initiate_auth.showModal();
-    const eventSource = new EventSource(
-      ` ${import.meta.env.VITE_BASE_URL}/sse`
-    );
-    eventSource.onmessage = ({ data }) => {
-      //console.log("this is the message received", data);
-      if (data) {
-        dispatch(createUserMode(JSON.parse(data)));
-        console.log(state);
-        toast.error("Something wrong ? ");
-        console.log(data);
-      }
-    };
-
-    await axios
-      .post(` ${import.meta.env.VITE_BASE_URL}/fetchUserModes`, {
-        ...state,
-        authMode: "",
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log("inside error function");
-        console.error("this is the error", error);
-        toast.error("Something wrong ? ");
-      });
   };
   useEffect(() => {
     const isValid = state.healthId && state.purpose && state.HipId;
