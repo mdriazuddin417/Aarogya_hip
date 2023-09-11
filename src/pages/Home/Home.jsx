@@ -1,4 +1,5 @@
 import { BiHomeAlt, BiReceipt, BiTask } from "react-icons/bi";
+import { BsFileEarmarkBreak } from "react-icons/bs";
 import { NavLink, Outlet } from "react-router-dom";
 import Header from "../../components/shared/Header";
 
@@ -47,9 +48,9 @@ const Home = () => {
               </NavLink>
             </li>
             <li id="sidebar">
-              <NavLink to={"/add_health_records"}>
+              <NavLink to={"/add_health_record"}>
                 <span>
-                  <BiTask className="text-xl" />
+                  <BsFileEarmarkBreak className="text-xl" />
                 </span>
                 Add Health Records
               </NavLink>
