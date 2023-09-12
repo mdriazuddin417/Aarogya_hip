@@ -36,7 +36,7 @@ const LinkedRecordsTable = ({ data }) => {
 
                 <td className="flex justify-start">
                   <div className="bg-green-500 px-2 py-1 text-white text-sm rounded">
-                    {item.link}
+                    {item.Linked}
                   </div>
                 </td>
                 <td

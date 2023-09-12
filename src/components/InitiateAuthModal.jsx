@@ -16,17 +16,16 @@ const InitiateAuthModal = ({ oldValue }) => {
   console.log("body from initiaAuth", body);
 
   const handleSubmit = async () => {
-    if (auth === "DEMOGRAPHICS") {
-      return window.auth_demographic.showModal();
-    }
+    
     await axios
       .post(`${import.meta.env.VITE_BASE_URL}/initiateAuth`, {
         ...body,
       })
       .then((response) => {
         if (response.status === 202) {
+          console.log("body of initiate auth",body);
           console.log(response.data.message);
-          window.verify_otp.showModal();
+          auth==="DEMOGRAPHICS"? window.auth_demographic.showModal():window.verify_otp.showModal();
         }
         console.log(response.data);
       })
