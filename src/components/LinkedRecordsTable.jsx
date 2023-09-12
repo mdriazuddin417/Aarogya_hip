@@ -20,7 +20,6 @@ const LinkedRecordsTable = ({ data }) => {
               <tr key={item._id}>
                 <td className="font-bold text-gray-400 "> {index + 1}</td>
                 <td className=" td">{item.PatientHealthId}</td>
-
                 <td
                   className=" link td"
                   onClick={() => {

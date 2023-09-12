@@ -11,7 +11,7 @@ const Consent = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
-          setdata(response.data.message);
+          setdata(response.data.data);
         }
         console.log(response.data);
       })

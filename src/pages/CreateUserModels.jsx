@@ -29,16 +29,16 @@ const CreateUserModels = () => {
     });
   };
   const handleSubmit = async () => {
+    window.initiate_auth.showModal();
     const eventSource = new EventSource(
       ` ${import.meta.env.VITE_BASE_URL}/sse`
     );
     eventSource.onmessage = ({ data }) => {
       //console.log("this is the message received", data);
       if (data) {
-        window.initiate_auth.showModal();
         dispatch(createUserMode(JSON.parse(data)));
         console.log(state);
-        toast.error("Invalid information ");
+        //toast.error("Invalid information ");
         console.log(data);
       }
     };
@@ -56,7 +56,7 @@ const CreateUserModels = () => {
         console.error("this is the error", error);
         toast.error("Invalid information ");
       });
-    setState({ ...init });
+    //setState({ ...init });
   };
   useEffect(() => {
     const isValid = state.healthId && state.purpose && state.HipId;

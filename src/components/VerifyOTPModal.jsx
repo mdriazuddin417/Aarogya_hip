@@ -13,7 +13,7 @@ const VerifyOTPModal = () => {
         if (response.status === 202) {
           console.log(response.data.message);
           toast.success("OTP successfully verify!");
-          window.verify_otp.showModal();
+          window.link_records.showModal();
         }
         console.log(response.data);
       })

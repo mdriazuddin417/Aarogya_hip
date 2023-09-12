@@ -28,7 +28,8 @@ const AuthDemographicsModal = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
-          window.verify_otp.showModal();
+          window.link_records.showModal();
+          //window.verify_otp.showModal();
           toast.success("successfully!");
         }
         console.log(response.data);
@@ -78,7 +79,7 @@ const AuthDemographicsModal = () => {
                     </div>
                   </div>
                   <div className="">
-                    <h3 className="text-lg font-semibold mb-2">HIP ID</h3>
+                    <h3 className="text-lg font-semibold mb-2">Date Of Birth</h3>
                     <div>
                       <CustomInput2
                         value={state.dateOfBirth}
