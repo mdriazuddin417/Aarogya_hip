@@ -58,9 +58,9 @@ const AddHealthRecord = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
-          window.notify_patient.showModal();
-          setLoading(false);
           toast.success("health record saved");
+          setLoading(false);
+          window.notify_patient.showModal();
         }
         console.log(response.data);
       })

@@ -6,14 +6,12 @@ import { consentList } from "../../constant/consentLists";
 const Consent = () => {
   const [data, setdata] = useState([]);
   const handlinkedRecords = async () => {
-    //window.link_records.showModal();
     await axios
       .post(` ${import.meta.env.VITE_BASE_URL}/showLinkedRecord`)
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
           setdata(response.data.message);
-          //window.verify_otp.showModal();
         }
         console.log(response.data);
       })
