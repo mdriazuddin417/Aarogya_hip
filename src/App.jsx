@@ -4,6 +4,7 @@ import Login from "./pages/LogInPages/Login";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
 import RequireAuth from "./pages/RequireAuth";
+import AddHealthRecord from "./pages/AddHealthRecord/AddHealthRecord";
 const App = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const App = () => {
           <Route index element={<CreateUserModels />} />
           <Route path="linked_records" element={<LinkedRecords />} />
           <Route path="data_transfer" element={<DataTransfer />} />
+          <Route path="add_health_record" element={<AddHealthRecord />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />

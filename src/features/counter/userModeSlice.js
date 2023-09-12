@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initialAuth } from "../../constant/data";
 
 const initialState = {
   userModes: [],

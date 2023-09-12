@@ -7,10 +7,7 @@ const InitiateAuthModal = ({ oldValue }) => {
   const [auth, setAuth] = useState("");
 
   const mode = useSelector((state) => state.mode.userModes[0]);
-  console.log("value of mode", mode);
-  const filteredMode = mode?.authModes?.filter(
-    (item) => item !== "DEMOGRAPHICS" && item !== "PASSWORD"
-  );
+  const filteredMode = mode?.authModes?.filter((item) => item !== "PASSWORD");
 
   const body = {
     ...oldValue,
@@ -19,6 +16,9 @@ const InitiateAuthModal = ({ oldValue }) => {
   console.log("body from initiaAuth", body);
 
   const handleSubmit = async () => {
+    if (auth === "DEMOGRAPHICS") {
+      return window.auth_demographic.showModal();
+    }
     await axios
       .post(`${import.meta.env.VITE_BASE_URL}/initiateAuth`, {
         ...body,
@@ -31,7 +31,7 @@ const InitiateAuthModal = ({ oldValue }) => {
         console.log(response.data);
       })
       .catch((error) => {
-        toast.error("Something wrong ? ");
+        toast.error("Invalid information ");
         console.log("inside error function");
         console.error("this is the error", error);
       });

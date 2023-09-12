@@ -8,6 +8,7 @@ import VerifyOTPModal from "../components/VerifyOTPModal";
 import LinkRecordModal from "../components/LinkRecordModal";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import AuthDemographicsModal from "../components/AuthDemographicsModal";
 
 const init = {
   healthId: "",
@@ -28,16 +29,16 @@ const CreateUserModels = () => {
     });
   };
   const handleSubmit = async () => {
-    window.initiate_auth.showModal();
     const eventSource = new EventSource(
       ` ${import.meta.env.VITE_BASE_URL}/sse`
     );
     eventSource.onmessage = ({ data }) => {
       //console.log("this is the message received", data);
       if (data) {
+        window.initiate_auth.showModal();
         dispatch(createUserMode(JSON.parse(data)));
         console.log(state);
-        toast.error("Something wrong ? ");
+        toast.error("Invalid information ");
         console.log(data);
       }
     };
@@ -53,8 +54,9 @@ const CreateUserModels = () => {
       .catch((error) => {
         console.log("inside error function");
         console.error("this is the error", error);
-        toast.error("Something wrong ? ");
+        toast.error("Invalid information ");
       });
+    setState({ ...init });
   };
   useEffect(() => {
     const isValid = state.healthId && state.purpose && state.HipId;
@@ -97,21 +99,15 @@ const CreateUserModels = () => {
             </div>
             <div>
               <select
-                //defaultValue={'KYC_AND_LINK'}
+                value={state.purpose}
                 name={"purpose"}
                 onChange={handleInput}
                 className="select select-primary w-full"
               >
-                <option disabled selected>
+                <option disabled value={""}>
                   choose consent ID
                 </option>
                 <option value={"KYC_AND_LINK"}>KYC_AND_LINK</option>
-                {/* <option value={'KYC'}>
-          KYC_AND_LINK
-          </option>
-          <option value={'KYC_AND_LINK'}>
-          KYC_AND_LINK
-          </option> */}
               </select>
             </div>
           </div>
@@ -147,6 +143,7 @@ const CreateUserModels = () => {
       <InitiateAuthModal oldValue={state} />
       <VerifyOTPModal />
       <LinkRecordModal />
+      <AuthDemographicsModal />
     </>
   );
 };

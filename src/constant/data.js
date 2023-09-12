@@ -138,3 +138,12 @@ export const hiUConsent = [
     __v: 0,
   },
 ];
+
+export const initialAuth = [
+  {
+    _id: "64ec4ceecd204dc0d139568c",
+    healthID: "gautam_1999@sbx",
+    authModes: ["MOBILE_OTP", "DEMOGRAPHICS", "PASSWORD", "AADHAAR_OTP"],
+    __v: 0,
+  },
+];

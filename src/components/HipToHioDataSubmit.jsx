@@ -61,7 +61,7 @@ const HipToHioDataSubmit = ({ consentID }) => {
   const handleSubmit = async () => {
     console.log(body);
     setLoading(true);
-    toast.success("successfully!");
+
     await axios
       .post(` ${import.meta.env.VITE_BASE_URL}/datapush`, { ...body })
       .then((response) => {
