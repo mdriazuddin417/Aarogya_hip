@@ -11,7 +11,7 @@ const Consent = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
-          setdata(response.data.data);
+          setdata(response.data.message);
         }
         console.log(response.data);
       })
@@ -21,9 +21,10 @@ const Consent = () => {
         toast.error("Something wrong ? ");
       });
   };
+  console.log("this is data",data);
   return (
     <div className="w-auto h-auto">
-      {data.length > 0 ? (
+      {data?.length > 0 ? (
         <LinkedRecordsTable data={data} />
       ) : (
         <div className="w-full h-[80vh] flex  justify-center items-center">
