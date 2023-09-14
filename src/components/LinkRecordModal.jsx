@@ -30,7 +30,8 @@ const LinkRecordModal = () => {
       .then((response) => {
         if (response.status === 202) {
           console.log(response.data.message);
-          //window.verify_otp.showModal();
+
+          toast.success("Linked Record add successfully");
         }
         console.log(response.data);
       })

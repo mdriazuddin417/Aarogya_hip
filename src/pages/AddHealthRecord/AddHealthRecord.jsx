@@ -15,7 +15,7 @@ const init = {
 const AddHealthRecord = () => {
   const [state, setState] = useState([init]);
   const [loading, setLoading] = useState(false);
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedState = [...state];
@@ -27,7 +27,10 @@ const AddHealthRecord = () => {
   };
 
   const addState = () => {
-    setState([...state, init]);
+    setState([
+      ...state,
+      { ...init, patientHealthId: state[0].patientHealthId },
+    ]);
   };
 
   const removeState = (index) => {
@@ -39,13 +42,6 @@ const AddHealthRecord = () => {
   const body = {
     LinkedHealthRecords: state,
   };
-  useEffect(() => {
-    const isDisabled = state.some((it) =>
-      Object.values(it).some((value) => value === "")
-    );
-
-    setIsSubmitDisabled(isDisabled);
-  }, [state]);
 
   const handleSubmit = async () => {
     console.log(body);
@@ -72,6 +68,21 @@ const AddHealthRecord = () => {
         console.error("this is the error", error);
       });
     setState([init]);
+  };
+
+  const isAnyValueMissing = () => {
+    for (const item of state) {
+      if (
+        item.patientHealthId === "" ||
+        item.patientRefNumber === "" ||
+        item.patientDisplay === "" ||
+        item.careContextRefNumber === "" ||
+        item.careContextDeisplay === ""
+      ) {
+        return true; // Return true if any value is missing
+      }
+    }
+    return false; // Return false if all values are present
   };
 
   return (
@@ -104,7 +115,8 @@ const AddHealthRecord = () => {
                       placeholder={"health Id"}
                       name={"patientHealthId"}
                       onChange={(e) => handleChange(e, index)}
-                      value={state[0].patientHealthId}
+                      value={item.patientHealthId}
+                      disabled={index === 0 ? false : true}
                     />
                   </div>
                   <div className="sm:w-auto w-full flex-grow md:flex-grow-0">
@@ -165,8 +177,8 @@ const AddHealthRecord = () => {
             </div>
             <div className="flex justify-end items-center ">
               <button
+                disabled={isAnyValueMissing() || loading}
                 onClick={handleSubmit}
-                disabled={isSubmitDisabled}
                 className="modal-action px-8 py-2 rounded-md text-white bg-primary shadow hover:scale-95 disabled:bg-gray-300  transform duration-200"
               >
                 {loading ? (
