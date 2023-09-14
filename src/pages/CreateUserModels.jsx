@@ -140,7 +140,7 @@ const CreateUserModels = () => {
         </div>
       </div>
 
-      <InitiateAuthModal oldValue={state} />
+      <InitiateAuthModal oldValue={state} setState={setState} init={init} />
       <VerifyOTPModal />
       <LinkRecordModal />
       <AuthDemographicsModal />

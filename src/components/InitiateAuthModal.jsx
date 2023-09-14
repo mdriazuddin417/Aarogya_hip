@@ -3,7 +3,7 @@ import CustomInput2 from "../utils/CustomInput2";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-const InitiateAuthModal = ({ oldValue }) => {
+const InitiateAuthModal = ({ oldValue, setState, init }) => {
   const [auth, setAuth] = useState("");
 
   const mode = useSelector((state) => state.mode.userModes[0]);
@@ -16,20 +16,23 @@ const InitiateAuthModal = ({ oldValue }) => {
   console.log("body from initiaAuth", body);
 
   const handleSubmit = async () => {
-    
     await axios
       .post(`${import.meta.env.VITE_BASE_URL}/initiateAuth`, {
         ...body,
       })
       .then((response) => {
         if (response.status === 202) {
-          console.log("body of initiate auth",body);
+          console.log("body of initiate auth", body);
           console.log(response.data.message);
-          auth==="DEMOGRAPHICS"? window.auth_demographic.showModal():window.verify_otp.showModal();
+          setState({ ...init });
+          auth === "DEMOGRAPHICS"
+            ? window.auth_demographic.showModal()
+            : window.verify_otp.showModal();
         }
         console.log(response.data);
       })
       .catch((error) => {
+        setState({ ...init });
         toast.error("Invalid information ");
         console.log("inside error function");
         console.error("this is the error", error);
